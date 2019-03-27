@@ -1,0 +1,69 @@
+.first{
+    height: 720px;
+    padding: 0 19px;
+    background-image: url('../../../assets/images/empty/01.png');
+    .header{
+        position: relative;
+        height: 10%;
+        .clock{
+            display: inline-block;
+            position: absolute;
+            right: 32px;
+            top: 35px;
+            font-family: auto;
+        }
+    }
+    .section{
+        height: 86%;
+        margin-top: 12px;
+        // border: solid 1px aliceblue;
+        .state{
+            position: relative;
+            // border:solid 1px white;
+            height:200px;
+            .piechart{
+                display: inline-block;
+                // border:solid 1px white;
+                width:43%;
+                height:100%;
+            }
+            .number{
+                display: inline-block;
+                position: absolute;
+                right: 0px;
+                // border:solid 1px rgb(148, 39, 39);
+                height:100%;
+                width:55%;
+                font-size: 3.5em;
+                .run{    
+                    position: relative;
+                    color: #43d243;
+                    top: 20px;
+                    left: 60px;
+                }
+                .fault{    
+                    position: relative;
+                    color: #cc0c0c;
+                    top: 20px;
+                    right: -225px;
+                }
+                .debug{    
+                    position: relative;
+                    color: #f7ff40;
+                    bottom: -123px;
+                    left: -16px;
+                }
+                .standby{    
+                    position: relative;
+                    color: #acacac;
+                    bottom: -123px;
+                    right: -145px;
+                }
+            }
+        }
+        .progress{
+            height:380px;
+            // border:solid 1px rgb(221, 71, 71);
+        }
+    }
+}

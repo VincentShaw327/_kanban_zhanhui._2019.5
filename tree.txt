@@ -1,0 +1,147 @@
+卷 服务 的文件夹 PATH 列表
+卷序列号为 000A-FB94
+G:.
+├─mock
+│  └─datas
+├─pulic
+├─scripts
+├─src
+│  ├─app
+│  │  ├─assets
+│  │  │  ├─iconfont
+│  │  │  └─images
+│  │  │      ├─assets
+│  │  │      ├─emoji
+│  │  │      └─icon
+│  │  ├─components
+│  │  │  ├─ant-design-pro
+│  │  │  │  ├─ActiveChart
+│  │  │  │  ├─Authorized
+│  │  │  │  │  └─demo
+│  │  │  │  ├─AvatarList
+│  │  │  │  │  └─demo
+│  │  │  │  ├─Charts
+│  │  │  │  │  ├─Bar
+│  │  │  │  │  ├─ChartCard
+│  │  │  │  │  ├─demo
+│  │  │  │  │  ├─Field
+│  │  │  │  │  ├─Gauge
+│  │  │  │  │  ├─MiniArea
+│  │  │  │  │  ├─MiniBar
+│  │  │  │  │  ├─MiniProgress
+│  │  │  │  │  ├─Pie
+│  │  │  │  │  ├─Radar
+│  │  │  │  │  ├─TagCloud
+│  │  │  │  │  ├─TimelineChart
+│  │  │  │  │  └─WaterWave
+│  │  │  │  ├─CountDown
+│  │  │  │  │  └─demo
+│  │  │  │  ├─DescriptionList
+│  │  │  │  │  └─demo
+│  │  │  │  ├─EditableItem
+│  │  │  │  ├─EditableLinkGroup
+│  │  │  │  ├─Ellipsis
+│  │  │  │  │  └─demo
+│  │  │  │  ├─Exception
+│  │  │  │  │  └─demo
+│  │  │  │  ├─FooterToolbar
+│  │  │  │  │  └─demo
+│  │  │  │  ├─GlobalFooter
+│  │  │  │  │  └─demo
+│  │  │  │  ├─GlobalHeader
+│  │  │  │  ├─HeaderSearch
+│  │  │  │  │  └─demo
+│  │  │  │  ├─Login
+│  │  │  │  │  └─demo
+│  │  │  │  ├─NoticeIcon
+│  │  │  │  │  └─demo
+│  │  │  │  ├─NumberInfo
+│  │  │  │  │  └─demo
+│  │  │  │  ├─PageHeader
+│  │  │  │  │  └─demo
+│  │  │  │  ├─Result
+│  │  │  │  │  └─demo
+│  │  │  │  ├─SiderMenu
+│  │  │  │  ├─StandardFormRow
+│  │  │  │  ├─StandardTable
+│  │  │  │  ├─TagSelect
+│  │  │  │  │  └─demo
+│  │  │  │  ├─Trend
+│  │  │  │  │  └─demo
+│  │  │  │  └─utils
+│  │  │  ├─BCComponents
+│  │  │  │  └─Charts
+│  │  │  │      ├─Bar
+│  │  │  │      ├─BarFold
+│  │  │  │      ├─BarFoldvel
+│  │  │  │      ├─BarTimeLine
+│  │  │  │      ├─ChartCard
+│  │  │  │      ├─demo
+│  │  │  │      ├─Field
+│  │  │  │      ├─FoldChart
+│  │  │  │      ├─FoldLineChart
+│  │  │  │      ├─Gauge
+│  │  │  │      ├─IdentityChart
+│  │  │  │      ├─MiniArea
+│  │  │  │      ├─MiniBar
+│  │  │  │      ├─MiniProgress
+│  │  │  │      ├─Pie
+│  │  │  │      ├─Radar
+│  │  │  │      ├─TagCloud
+│  │  │  │      ├─TimelineChart
+│  │  │  │      └─WaterWave
+│  │  │  ├─Chart
+│  │  │  │  ├─Areanull
+│  │  │  │  ├─BarSort
+│  │  │  │  ├─NumGauge
+│  │  │  │  └─Polyline
+│  │  │  ├─ChartCards
+│  │  │  │  └─NumberCard
+│  │  │  ├─Export
+│  │  │  │  └─table
+│  │  │  ├─PageHeader
+│  │  │  ├─TCommon
+│  │  │  │  ├─Tiltle
+│  │  │  │  └─utils
+│  │  │  │      ├─dataHandle
+│  │  │  │      └─request
+│  │  │  ├─temporary
+│  │  │  ├─TForm
+│  │  │  │  ├─CreatFormItem
+│  │  │  │  └─QueryForm
+│  │  │  ├─TList
+│  │  │  ├─TModal
+│  │  │  ├─TTable
+│  │  │  │  ├─commonTable
+│  │  │  │  ├─exportData
+│  │  │  │  ├─SimpleTable
+│  │  │  │  └─StandardTable
+│  │  │  ├─TUploader
+│  │  │  ├─utils
+│  │  │  ├─_demo
+│  │  │  └─_tmpl
+│  │  ├─layouts
+│  │  │  └─Header
+│  │  ├─pages
+│  │  │  ├─demos
+│  │  │  ├─THome
+│  │  │  ├─TScada
+│  │  │  ├─TSetting
+│  │  │  └─TUser
+│  │  │      ├─TUserCommon
+│  │  │      └─utils
+│  │  │          ├─dataHandle
+│  │  │          └─request
+│  │  ├─Routes
+│  │  ├─store
+│  │  ├─style
+│  │  └─widgets
+│  ├─common
+│  ├─enums
+│  ├─redux
+│  │  ├─actions
+│  │  ├─middleware
+│  │  └─reducers
+│  ├─services
+│  └─utils
+└─tests

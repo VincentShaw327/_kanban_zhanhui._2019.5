@@ -1,0 +1,34 @@
+
+.kanban{
+    width: 1280px;
+    height: 720px;
+    border: solid 1px red;
+    .one,.two,.three,.four {
+        height: 720px;
+        background-repeat: no-repeat;
+    }
+    .one{
+        background-image: url('../../assets/images/empty/01.png');
+        .header{
+            position: relative;
+            height: 5%;
+            .clock{
+                display: inline-block;
+                position: absolute;
+                right: 32px;
+                top: 35px;
+                font-family: auto;
+            }
+        }
+    }
+    .two{
+        background-image: url('../../assets/images/empty/02.png');
+    }
+    .three{
+        background-image: url('../../assets/images/empty/03.png');
+    }
+    .four{
+        background-image: url('../../assets/images/empty/04.png');
+        border: solid 1px;
+    }
+}
