@@ -33,6 +33,7 @@ export default class table extends Component {
             dataIndex: 'device',
             key: 'device',
             width: 180,
+            onCell:(record,index)=>({class:'test'})
             // render: text => <a>{text}</a>,
           },  {
             title: '工单',
@@ -133,30 +134,12 @@ export default class table extends Component {
             capacity:23,
             progress:47,
             rest:3406,
-          }, {
-            key: '9',
-            name: '2F生产设备02',
-            device:"A09",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '10',
-            name: '3F生产设备01',
-            device:"A10",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }
+          }, 
         ];
 
         return (
             <Fragment>
-                    <Table columns={columns} dataSource={data} pagination={{ hideOnSinglePage: true, pageSize: 10 }} />
+                    <Table columns={columns} dataSource={data} bordered size="small" pagination={{ hideOnSinglePage: true, pageSize: 10 }} />
             </Fragment>
         )
     }
