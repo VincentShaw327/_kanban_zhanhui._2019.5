@@ -10,6 +10,7 @@ import {
 import styles from './style.less'
 import Clock from 'widgets/Clock'
 import First from './first'
+import Second from './second'
 
 
 export default class Home extends Component {
@@ -38,10 +39,11 @@ export default class Home extends Component {
                 {/* <Carousel autoplay> */}
                 <Carousel afterChange={this.onChange}>
                     <First/>
-                    <div className={styles.two}>
-                        {/* <h3>2</h3>
-                        <img src={p02} /> */}
-                    </div>
+                    <Second/>
+                    {/* <div className={styles.two}>
+                        <h3>2</h3>
+                        <img src={p02} />
+                    </div> */}
                     <div className={styles.three}>
                         {/* <h3>3</h3>
                         <img src={p02} /> */}
