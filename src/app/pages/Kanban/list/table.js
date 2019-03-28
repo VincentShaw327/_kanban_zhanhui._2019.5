@@ -144,3 +144,95 @@ export default class table extends Component {
         )
     }
 }
+
+
+class plan extends Component {
+    constructor( props, context ) {
+        super( props )
+        this.state = {
+        }
+    }
+
+    componentWillMount() {}
+
+    // 组件已经加载到dom中
+    componentDidMount() {
+
+    }
+
+    render() {
+        const columns = [
+          {
+            title: '工单编号',
+            dataIndex: 'device',
+            key: 'device',
+            width: 180,
+            onCell:(record,index)=>({class:'test'})
+            // render: text => <a>{text}</a>,
+          },  {
+            title: '产品名称',
+            dataIndex: 'order',
+            key: 'order',
+            render: text => <span>220</span>,
+          }, {
+           title: '数量',
+            dataIndex: 'product',
+            key: 'product',
+            render: text => <span>220</span>,
+          }, {
+            title: '计划开始时间',
+             dataIndex: 'capacity',
+             key: 'capacity',
+             render: text => <span>220</span>,
+           },
+        ];
+
+        const data = [{
+            key: '1',
+            device:"A01",
+            order: 0.85,
+            product:'产品',
+            capacity:23,
+            progress:47,
+            rest:3406,
+          }, {
+            key: '2',
+            name: '冷水主机动力开关箱',
+            device:"A01",
+            order: 0.85,
+            product:'产品',
+            capacity:23,
+            progress:47,
+            rest:3406,
+          }, {
+            key: '3',
+            name: '空压机开关箱',
+            device:"A01",
+            order: 0.85,
+            product:'产品',
+            capacity:23,
+            progress:47,
+            rest:3406,
+          }, {
+            key: '4',
+            name: '制氮机配电柜',
+            device:"A01",
+            order: 0.85,
+            product:'产品',
+            capacity:23,
+            progress:47,
+            rest:3406,
+          }, 
+        ];
+
+        return (
+            <Fragment>
+                    <Table columns={columns} dataSource={data} bordered size="small" pagination={{ hideOnSinglePage: true, pageSize: 10 }} />
+            </Fragment>
+        )
+    }
+}
+
+export{
+  table,plan
+}
