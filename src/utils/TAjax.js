@@ -4,8 +4,9 @@ import { format } from 'upath';
 import { ENOPROTOOPT, EOPNOTSUPP } from 'constants';
 
 // let urlBase = 'http://localhost:8888';
-export const urlBase = 'http://dev.mes.top-link.me/';
+// export const urlBase = 'http://dev.mes.top-link.me/';
 // export const urlBase = 'http://localhost:1111';
+export const urlBase = 'http://192.168.0.109:9005';
 export const mockUrlBase = 'http://localhost:1111';
 
 // export  let urlBase = 'http://192.168.200.5';
@@ -92,9 +93,12 @@ export function TPostData( url, op, obj, cb, ecb ) {
         method: 'POST',
         mode: 'cors',
         // body: JSON.stringify(reqObj),
-        body: JSON.stringify( obj ),
+        // body: JSON.stringify( obj ),
+        body:  obj,
         headers: {
-            'Content-Type': 'application/json;charset=utf-8',
+            // 'Content-Type': 'application/json;charset=utf-8',
+            'Content-Type': 'application/octet-stream',
+            'Accept-Type': 'application/octet-stream'
             // 'Accept-Type': 'application/json;charset=utf-8'
         },
     } ).then( checkStatus, err => ecb( err ) ).then( parseJSON )
@@ -196,9 +200,11 @@ export function TAjax( method, url, op, obj, scb, fcb, async ) {
         // 发送HTTP请求-post
         const reqObj = {
             op: op,
-            data: JSON.stringify( obj ),
+            // data: JSON.stringify( obj ),
+            data:  obj ,
         };
-        xhr.send( JSON.stringify( reqObj ) );
+        // xhr.send( JSON.stringify( reqObj ) );
+        xhr.send( obj );
     } else {
         // 发送HTTP请求-get
         xhr.send( null );

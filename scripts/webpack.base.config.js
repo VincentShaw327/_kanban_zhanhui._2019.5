@@ -29,10 +29,12 @@ const webpackConfigBase = {
       api: path.join(__dirname, '/../src/services/api'),
       reducers: path.join(__dirname, '/../src/redux/reducers'),
       utils: path.join(__dirname, '/../src/utils'),
+      services: path.join(__dirname, '/../src/services'),
       style: path.join(__dirname, '/../src/app/style'),
       images: path.join(__dirname, '/../src/app/assets/images'),
       layout: path.join(__dirname, '/../src/app/layout'),
       widgets: path.join(__dirname, '/../src/app/widgets'),
+      enums: path.join(__dirname, '/../src/enums'),
     },
   },
   resolveLoader: {
