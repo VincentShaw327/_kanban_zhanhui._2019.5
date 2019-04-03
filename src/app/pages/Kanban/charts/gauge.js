@@ -39,20 +39,24 @@ Shape.registerShape('point', 'pointer', {
   },
 });
 
-const data = [
-  { value: 50.6 },
-];
-const cols = {
-  value: {
-    min: 0,
-    max: 100,
-    tickInterval: 10,
-    nice: false,
-  },
-};
 
 class Gauge extends React.Component {
   render() {
+    let {name,value,color}=this.props;
+    if(!name){
+      name='未知名称'
+    }
+    const data = [
+      { value: value?value:0 },
+    ];
+    const cols = {
+      value: {
+        min: 0,
+        max: 100,
+        tickInterval: 10,
+        nice: false,
+      },
+    };
     return (
       <Chart height={100} data={data} scale={cols} padding={[0, 0, 10, 0]} forceFit>
         <Coord type="polar" startAngle={-9 / 8 * Math.PI} endAngle={1 / 8 * Math.PI} radius={0.85} />
@@ -98,7 +102,7 @@ class Gauge extends React.Component {
             start={[0, 0.965]}
             end={[data[0].value, 0.965]}
             style={{
-              stroke: '#1890FF',
+              stroke: color?color:'#1890FF',
               lineWidth: 5,
             }}
           />
@@ -109,8 +113,8 @@ class Gauge extends React.Component {
                 `<div style="width: 100%;color:white;font-size: 10px;
                             text-align: center;>
                             <span style="color:white;margin: 0;">
-                                合格率:
-                                <span style="font-size: 14px;font-weight:Bold;color:#27C265; margin-left:5px;">
+                                ${name}:
+                                <span style="font-size: 14px;font-weight:Bold;color:${color?color:'#1890FF'}; margin-left:5px;">
                                     ${data[0].value}%
                                 </span>
                             </span>
@@ -131,5 +135,92 @@ class Gauge extends React.Component {
   }
 }
 
+class Metering extends React.Component {
+  render() {
+    const {value,weight}=this.props;
+    const data = [
+      { value: value },
+    ];
+    const cols = {
+      value: {
+        min: 0,
+        max: 100,
+        tickInterval: 10,
+        nice: false,
+      },
+    };
+    return (
+      <Chart height={80}  data={data} scale={cols} padding={[0, 0, 10, 0]} forceFit>
+        <Coord type="polar" startAngle={- Math.PI} endAngle={0} radius={0.85} />
+        <Axis
+          name="value"
+          zIndex={2}
+          line={null}
+          label={null}
+          visible={false}
+          // subTickCount={4}
+          // subTickLine={{
+          //   length: -6,
+          //   stroke: '#fff',
+          //   strokeOpacity: 1,
+          // }}
+          tickLine={null}
+        />
+        <Axis name="1" visible={false} />
+        <Guide>
+          <Arc
+            zIndex={0}
+            start={[0, 0.965]}
+            end={[100, 0.965]}
+            style={{ // 底灰色
+              stroke: '#CBCBCB',
+              //   stroke: 'red',
+              lineCap:'round',
+              lineWidth: 5,
+            }}
+          />
+          <Arc
+            zIndex={1}
+            start={[0, 0.965]}
+            end={[data[0].value, 0.965]}
+            style={{
+              stroke: '#FFFF5C',
+              lineWidth: 9,
+              lineCap:'round'
+            }}
+          />
+          <Html
+            position={['50%', '85%']}
+            html={
+                () => (
+                `<div style="width: 100%;color:white;font-size: 10px;
+                            text-align: center;>
+                            <span style="color:white;margin: 0;">
+                                <span style="font-size: 14px;font-weight:Bold;color:white; margin-left:5px;">
+                                    ${weight}  KG
+                                </span>
+                            </span>
+                </div>`)
+            }
+          />
+        </Guide>
+        <Geom
+          // type="point"
+          type="path"
+          position="value*1"
+          // shape="pointer"
+          // color="#ffffff00"
+          active={false}
+          style={{ stroke: '#fff', lineWidth: 1}}
+        />
+      </Chart>
+    );
+  }
+}
+
 // CDN END
 export default Gauge;
+
+export{
+  Metering
+}

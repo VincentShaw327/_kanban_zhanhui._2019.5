@@ -20,24 +20,7 @@ class devState extends React.Component {
   render() {
     const { DataView } = DataSet;
     const { Html } = Guide;
-    const data = [
-      {
-        item: "待机",
-        count: 40
-      },
-      {
-        item: "调膜",
-        count: 21
-      },
-      {
-        item: "故障",
-        count: 17
-      },
-      {
-        item: "运行",
-        count: 13
-      },
-    ];
+    const {data}=this.props
     const dv = new DataView();
     dv.source(data).transform({
       type: "percent",
@@ -85,7 +68,8 @@ class devState extends React.Component {
           <Geom
             type="intervalStack"
             position="percent"
-            color="item"
+            color={['item',['#B3B3B3','#FFC106',"#FF3565","#28CB67"]]}
+            // color="item"
             tooltip={[
               "item*percent",
               (item, percent) => {
@@ -119,34 +103,9 @@ class devState extends React.Component {
 
 class unqualified extends React.Component {
   render() {
+    const {data}=this.props
     const { DataView } = DataSet;
     const { Html } = Guide;
-    const data = [
-      {
-        item: "表面起膜",
-        count: 23
-      },
-      {
-        item: "飞边",
-        count: 21
-      },
-      {
-        item: "未填满",
-        count: 17
-      },
-      {
-        item: "黑斑",
-        count: 13
-      },
-      {
-        item: "变形",
-        count: 13
-      },
-      {
-        item: "破裂",
-        count: 13
-      },
-    ];
     const dv = new DataView();
     dv.source(data).transform({
       type: "percent",
@@ -194,7 +153,98 @@ class unqualified extends React.Component {
           <Geom
             type="intervalStack"
             position="percent"
-            color="item"
+            color={['item',['#00BCFF','#DF5A6D',"#9A91E4","#F08C37","#00D09D","#367AF7"]]}
+            // color="item"
+            tooltip={[
+              "item*percent",
+              (item, percent) => {
+                percent = percent * 100 + "%";
+                return {
+                  name: item,
+                  value: percent
+                };
+              }
+            ]}
+            style={{
+              lineWidth: 1,
+              stroke: "#fff",
+            }}
+          >
+            <Label
+              content="percent"
+              formatter={(val, item) => {
+                return item.point.item ;
+                // return item.point.item + ": " + val;
+              }}
+              textStyle={{
+                fill:"white"
+              }}
+            />
+          </Geom>
+        </Chart>
+    );
+  }
+}
+
+class service extends React.Component {
+  render() {
+    const { DataView } = DataSet;
+    const { Html } = Guide;
+    const {data}=this.props
+    let sum=0;
+    data.forEach(ele=>sum+=ele.count)
+    const dv = new DataView();
+    dv.source(data).transform({
+      type: "percent",
+      field: "count",
+      dimension: "item",
+      as: "percent"
+    });
+    const cols = {
+      percent: {
+        formatter: val => {
+          val = val * 100 + "%";
+          return val;
+        }
+      }
+    };
+    return (
+        <Chart
+          // height={window.innerHeight}
+          width="300"
+          height="180"
+          data={dv}
+          scale={cols}
+          padding={[0, 0, 20, 0]}
+          forceFit
+        >
+          <Coord type={"theta"} radius={0.7} innerRadius={0.75} />
+          <Axis name="percent" />
+          <Legend
+            name="percent"
+            position="left"
+            visible={true}
+            offsetY={ 10}
+            offsetX={0}
+          />
+          <Tooltip
+            showTitle={false}
+            itemTpl="<li><span style=&quot;background-color:{color};&quot; class=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
+          />
+          <Guide>
+            <Html
+              position={["50%", "50%"]}
+              // html="<div style=&quot;color:white;font-size:0.5em;text-align: center;width: 10em;&quot;>不良统计</div>"
+              html={`<div style=color:white;font-size:14px;text-align: center;width: 10em;>共${sum}台</div>`}
+              alignX="middle"
+              alignY="middle"
+            />
+          </Guide>
+          <Geom
+            type="intervalStack"
+            position="percent"
+            color={['item',['#FF3565','#367AF7',"#00D09D"]]}
+            // color="item"
             tooltip={[
               "item*percent",
               (item, percent) => {
@@ -230,5 +280,6 @@ export default devState;
 
 export{
     devState,
-    unqualified
+    unqualified,
+    service
 }

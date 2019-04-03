@@ -18,64 +18,17 @@ import DataSet from "@antv/data-set";
 
 class qualified extends React.Component {
   render() {
-    const data = [
-      {
-        month: "3.1",
-        Tokyo: 17.0,
-        London: 13.9
-      },
-      {
-        month: "3.2",
-        Tokyo: 16.9,
-        London: 14.2
-      },
-      {
-        month: "3.3",
-        Tokyo: 19.5,
-        London: 15.7
-      },
-      {
-        month: "3.4",
-        Tokyo: 14.5,
-        London: 8.5
-      },
-      {
-        month: "3.5",
-        Tokyo: 18.4,
-        London: 11.9
-      },
-      {
-        month: "3.6",
-        Tokyo: 21.5,
-        London: 15.2
-      },
-      {
-        month: "3.7",
-        Tokyo: 25.2,
-        London: 17.0
-      },
-      {
-        month: "3.8",
-        Tokyo: 26.5,
-        London: 16.6
-      },
-      {
-        month: "3.9",
-        Tokyo: 23.3,
-        London: 14.2
-      },
-    ];
+    const{data}=this.props;
     const ds = new DataSet();
     const dv = ds.createView().source(data);
     dv.transform({
       type: "fold",
-      fields: ["Tokyo", "London"],
+      fields: ["qualified", "unqualified"],
       // 展开字段集
-      key: "city",
+      key: "type",
       // key字段
-      value: "temperature" // value字段
+      value: "percent" // value字段
     });
-    console.log(dv);
     const cols = {
       month: {
         range: [0, 1]
@@ -105,7 +58,7 @@ class qualified extends React.Component {
             }
            />
           <Axis
-            name="temperature"
+            name="percent"
             line={
                 {
                     stroke: 'white',
@@ -132,16 +85,18 @@ class qualified extends React.Component {
           />
           <Geom
             type="line"
-            position="month*temperature"
+            position="month*percent"
             size={2}
-            color={"city"}
+            // color={"type"}
+            color={['type',['#28CB67','#FF3565']]}
           />
           <Geom
             type="point"
-            position="month*temperature"
+            position="month*percent"
             size={4}
             shape={"circle"}
-            color={"city"}
+            color={['type',"white"]}
+            // color={"type"}
             style={{
               stroke: "#fff",
               lineWidth: 1
@@ -152,60 +107,15 @@ class qualified extends React.Component {
     );
   }
 }
+
 class yieldRate extends React.Component {
   render() {
-    const data = [
-      {
-        month: "3.1",
-        Tokyo: 17.0,
-        London: 13.9
-      },
-      {
-        month: "3.2",
-        Tokyo: 16.9,
-        London: 14.2
-      },
-      {
-        month: "3.3",
-        Tokyo: 19.5,
-        London: 15.7
-      },
-      {
-        month: "3.4",
-        Tokyo: 14.5,
-        London: 8.5
-      },
-      {
-        month: "3.5",
-        Tokyo: 18.4,
-        London: 11.9
-      },
-      {
-        month: "3.6",
-        Tokyo: 21.5,
-        London: 15.2
-      },
-      {
-        month: "3.7",
-        Tokyo: 25.2,
-        London: 17.0
-      },
-      {
-        month: "3.8",
-        Tokyo: 26.5,
-        London: 16.6
-      },
-      {
-        month: "3.9",
-        Tokyo: 23.3,
-        London: 14.2
-      },
-    ];
+    const{data}=this.props; 
     const ds = new DataSet();
     const dv = ds.createView().source(data);
     dv.transform({
       type: "fold",
-      fields: ["Tokyo" ],
+      fields: ["YieldRate" ],
       // 展开字段集
       key: "city",
       // key字段
@@ -273,14 +183,17 @@ class yieldRate extends React.Component {
             type="line"
             position="month*temperature"
             size={2}
-            color={"city"}
+            // color={['type',['#28CB67','#00BCFF']]}
+            color="#28CB67"
           />
           <Geom
             type="point"
             position="month*temperature"
             size={4}
             shape={"circle"}
-            color={"city"}
+            color="white"
+            // color="#28CB67"
+            // color={"city"}
             style={{
               stroke: "#fff",
               lineWidth: 1
