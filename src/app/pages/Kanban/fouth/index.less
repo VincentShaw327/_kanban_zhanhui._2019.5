@@ -1,0 +1,101 @@
+.first{
+    height: 720px;
+    padding: 0 19px;
+    background-image: url('../../../assets/images/empty/04_cup.png');
+    .header{
+        position: relative;
+        height: 10%;
+        .clock{
+            display: inline-block;
+            position: absolute;
+            right: 32px;
+            top: 35px;
+            font-family: auto;
+        }
+    }
+    .section{
+        height: 86%;
+        margin-top: 12px;
+        // border: solid 1px aliceblue;
+        .left{
+            // border: solid 1px aliceblue;
+            height:620px;
+            .malfunction{
+                // border: solid 1px aliceblue;
+                height: 420px;
+                margin-top: 10px;
+                .pa,.abs,.pom{
+                    // border: solid 1px #e6f331;
+                    height: 160px;
+                    .state{
+                        position: absolute;
+                    }
+                }
+                .metering{
+                    // border: solid 1px #b35327;
+                    height: 160px;
+                    text-align: center;
+                    // display: flex;
+                    // flex-direction: column;
+                    // justify-content: center;
+                    // align-items: center;
+                }
+                .pa{}
+                .abs{}
+                .pom{}
+            }
+            .dry{
+                // border: solid 1px #c2e06e;
+                height: 180px;
+                margin-top: 10px;
+                color: white;
+                // padding: 45px 19px;
+                // height:100%;
+                .state{
+                    position: absolute;
+                    bottom: 31px;
+                    left: 40px;
+                }
+            }
+        }
+        .right{
+            // border: solid 1px aliceblue;
+            height:620px;
+            .service_history{
+                // border: solid 1px aliceblue;
+                height: 270px;
+            }
+            .service_task{
+                // border: solid 1px aliceblue;
+                height: 338px;
+                margin-top: 10px;
+                padding-top: 50px;
+            }
+        }
+        
+    }
+}
+
+.feedOrder{
+    // border: solid 1px white;
+    position: relative;
+    color: aliceblue;
+    font-size: 14px;
+    height: 147px;
+    margin-bottom: 10px;
+    padding: 15px 2px;
+    .header{
+        font-size: 24px;
+    }
+    .section{
+        padding-left: 70px;
+        .id{
+            margin-top: 45px;
+        }
+    }
+    .aside{
+        position: absolute;
+        top: 45px;
+        right: 15px;
+    }
+}

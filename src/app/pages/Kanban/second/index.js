@@ -10,20 +10,125 @@ import {
 import styles from './index.less'
 import Clock from 'widgets/Clock'
 import DeviceState from 'widgets/DeviceState'
+import OrderState from 'widgets/OrderState'
 // import DevState,{unqualified as Unqualified} from '../charts/pie.js'
 import Gauge from '../charts/gauge.js'
 import {yieldRate as YRate} from '../charts/line.js'
 import {plan as Task} from '../list/table.js'
+import {order} from 'enums'
+import {_Inj,_Robot,_Mold} from 'enums/device'
+
 
 export default class first extends Component {
     constructor( props, context ) {
         super( props )
         this.state = {
+            orderData:{
+                orderID:'20190318001',
+                planNum:35000,
+                fulfillNum:23650,
+                productName:'鼠标外壳',
+                cycle:80,
+                state:1,
+                expectedFinishTime:'2019-03-29 19:34:00',
+                percent:87
+            },
+            deviceState:{
+                inject:2,
+                robot:1,
+                mold:2
+            },
+            effectiveness:{
+                OEE:87,
+                timeRate:90,
+                performanceRate:92,
+                deviceEffRate:82,
+            },
+            yieldRateList:[
+                {
+                  month: "3.1",
+                  YieldRate: 17.0,
+                },
+                {
+                  month: "3.2",
+                  YieldRate: 16.9,
+                },
+                {
+                  month: "3.3",
+                  YieldRate: 19.5,
+                },
+                {
+                  month: "3.4",
+                  YieldRate: 14.5,
+                },
+                {
+                  month: "3.5",
+                  YieldRate: 18.4,
+                },
+                {
+                  month: "3.6",
+                  YieldRate: 21.5,
+                },
+                {
+                  month: "3.7",
+                  YieldRate: 25.2,
+                },
+                {
+                  month: "3.8",
+                  YieldRate: 26.5,
+                },
+                {
+                  month: "3.9",
+                  YieldRate: 23.3,
+                },
+              ],
+            taskList: [{
+                key: '1',
+                device:"A01",
+                order: '2019021800',
+                product:'鼠标键盘',
+                capacity:23098,
+                progress:47,
+                number:3406,
+                startTime:'2019 07.13 15:47:24'
+              }, {
+                key: '2',
+                name: '冷水主机动力开关箱',
+                device:"A01",
+                order: '2019021800',
+                product:'产品',
+                capacity:23098,
+                progress:47,
+                number:3406,
+                startTime:'2019 07.13 15:47:24'
+              }, {
+                key: '3',
+                name: '空压机开关箱',
+                device:"A01",
+                order: '2019021800',
+                product:'产品',
+                capacity:23098,
+                progress:47,
+                number:3406,
+                startTime:'2019 07.13 15:47:24'
+              }, {
+                key: '4',
+                name: '制氮机配电柜',
+                device:"A01",
+                order: '2019021800',
+                product:'产品',
+                capacity:23098,
+                progress:47,
+                number:3406,
+                startTime:'2019 07.13 15:47:24'
+              }, 
+            ]
         }
     }
 
     render() {
-
+        // const{orderData,deviceState,effectiveness,yieldRateList,taskList}=this.state;
+        const{orderData,deviceState,effectiveness,yieldRateList,taskList}=this.props;
         return (
             <div className={styles.first}>
                 <header className={styles.header}>
@@ -38,19 +143,22 @@ export default class first extends Component {
                                 <Row style={{height:'100%'}}>
                                     <Col span={9} style={{border:'solid 0px white',height:'100%'}}>
                                         <div className={styles.workcenter}>
-                                            <div className={styles.state}><DeviceState type="RUNNING" txt="生产中" /></div>
+                                            <div className={styles.state}>
+                                                {/* <OrderState type="PRODUCTION" txt="生产中" /> */}
+                                                <OrderState type={order.getTypeFromValue(1)} />
+                                            </div>
                                             <div className={styles.circle}>80 s</div>
                                         </div>
                                     </Col>
                                     <Col span={15} style={{border:'solid 0px white',height:'100%'}}>
                                         <div className={styles.workorder}>
-                                            <span className={styles.order}>20190318001</span>
-                                            <span className={styles.number}>3000<span className={styles.unit}>pcs</span></span>
-                                            <span className={styles.name}>鼠标外壳</span>
-                                            <span className={styles.perfection}>28000<span className={styles.unit}>pcs</span></span>
-                                            <span className={styles.time}>20190320 17:30:01</span>
-                                            <span className={styles.percent}>87%</span>
-                                            <span className={styles.progress}><Progress strokeWidth={16} percent={30} /></span>
+                                            <span className={styles.order}>{orderData.orderID}</span>
+                                            <span className={styles.number}>{orderData.planNum}<span className={styles.unit}>pcs</span></span>
+                                            <span className={styles.name}>{orderData.productName}</span>
+                                            <span className={styles.perfection}>{orderData.fulfillNum}<span className={styles.unit}>pcs</span></span>
+                                            <span className={styles.time}>{orderData.expectedFinishTime}</span>
+                                            <span className={styles.percent}>{orderData.percent}%</span>
+                                            <span className={styles.progress}><Progress strokeWidth={16} percent={orderData.percent} /></span>
                                         </div>
                                     </Col>
                                 </Row>
@@ -59,15 +167,15 @@ export default class first extends Component {
                                 {/* <Progress/> */}
                                 <div className={styles.inject}>
                                     <span className={styles.name}>注塑机</span>
-                                    <DeviceState type="RUNNING" txt="运行" />
+                                    <DeviceState type={_Inj.getTypeFromValue(1)} />
                                 </div>
                                 <div className={styles.robot}>
                                     <span className={styles.name}>机械手</span>
-                                    <DeviceState type="RUNNING" txt="故障" />
+                                    <DeviceState type={_Robot.getTypeFromValue(-1)} />
                                 </div>
                                 <div className={styles.mold}>
                                     <span className={styles.name}>模温机</span>
-                                    <DeviceState type="RUNNING" txt="调膜" />
+                                    <DeviceState type={_Mold.getTypeFromValue(2)} />
                                 </div>
                             </div>
                         </Col>
@@ -75,27 +183,27 @@ export default class first extends Component {
                             <div className={styles.oee}>
                                 <Row gutter={16} style={{border:'solid 0px white',height:'100%'}}>
                                     <Col span={6} style={{border:'solid 0px white',height:'40%'}}>
-                                        <span className={styles.percent}>86%</span>
+                                        <span className={styles.percent}>{effectiveness.OEE}%</span>
                                     </Col>
                                     <Col span={6} style={{border:'solid 0px white',height:'85%'}}>
-                                        <Gauge/>
+                                        <Gauge value={effectiveness.timeRate} name="时间稼动率" color="#28CB67" />
                                     </Col>
                                     <Col span={6} style={{border:'solid 0px white',height:'85%'}}>
-                                        <Gauge/>
+                                        <Gauge value={effectiveness.performanceRate} name="性能稼动率" color="#00BCFF"/>
                                     </Col>
                                     <Col span={6} style={{border:'solid 0px white',height:'85%'}}>
-                                        <Gauge/>
+                                        <Gauge value={effectiveness.deviceEffRate} name="设备综合效率" color="#FFC106"/>
                                     </Col>
                                 </Row>
                             </div>
                             <div className={styles.qualified}>
-                                <YRate/>
+                                <YRate data={yieldRateList}/>
                             </div>
                             <div className={styles.task}>
                                 {/* <div className={styles.piechart}>
                                     <Unqualified/>
                                 </div> */}
-                                <Task/>
+                                <Task data={taskList}/>
                             </div>
                         </Col>
                     </Row>

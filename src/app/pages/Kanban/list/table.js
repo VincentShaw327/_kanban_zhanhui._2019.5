@@ -4,15 +4,16 @@ import {
     Icon,
     Row,
     Col,
-    Card,
+    Progress ,
     Table,
     Divider,
 } from 'antd';
-
+import moment from 'moment'
 import './style.css'
+import {_Service} from 'enums/task'
 
 
-export default class table extends Component {
+export default class progress extends Component {
     constructor( props, context ) {
         super( props )
         this.state = {
@@ -27,119 +28,63 @@ export default class table extends Component {
     }
 
     render() {
+        const {data}=this.props;
         const columns = [
           {
             title: '机台',
             dataIndex: 'device',
             key: 'device',
-            width: 180,
+            width: 90,
             onCell:(record,index)=>({class:'test'})
             // render: text => <a>{text}</a>,
           },  {
             title: '工单',
             dataIndex: 'order',
+            width: 110,
             key: 'order',
-            render: text => <span>220</span>,
+            render: (text,record,index) => <span>{`${text}${index+1}`}</span>,
           }, {
            title: '产品',
             dataIndex: 'product',
+            width: 100,
             key: 'product',
-            render: text => <span>220</span>,
+            // render: text => <span>220</span>,
           }, {
-            title: '产能',
+            // title: '产能(pcs/min)',
+            title: (<div>产能<br/><span>(pcs/min)</span></div>),
              dataIndex: 'capacity',
-             key: 'capacity',
+            width: 80,
+            key: 'capacity',
              render: text => <span>220</span>,
            }, {
             title: '进度',
             dataIndex: 'progress',
             key: 'progress',
-            render: text => <span>2.41</span>,
+            width:160,
+            render: (text,record) => (
+              <div>
+                  <div>{record.completed?record.completed:'-'}/{record.plan?record.plan:'-'}</div>
+                <Progress style={{fontSize:0}} percent={text}/>
+              </div>),
           }, {
             title: '剩余',
             dataIndex: 'rest',
             key: 'rest',
-            render: text => <span>2.41</span>,
+            render: num =>{
+              let time=moment.duration(num, 'minutes');
+              console.log('time',time.hours())
+              const days=time.days();
+              const hours=time.hours();
+              const minutes=time.minutes();
+              return(<span>
+                {`${hours}时${minutes}分`}
+              </span>)
+            } 
           }, 
         ];
-
-        const data = [{
-            key: '1',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '2',
-            name: '冷水主机动力开关箱',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '3',
-            name: '空压机开关箱',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '4',
-            name: '制氮机配电柜',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '5',
-            name: '纯水机房配电柜',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '6',
-            name: '1F生产设备01',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '7',
-            name: '1F生产设备02',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '8',
-            name: '2F生产设备01',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, 
-        ];
-
         return (
             <Fragment>
-                    <Table columns={columns} dataSource={data} bordered size="small" pagination={{ hideOnSinglePage: true, pageSize: 10 }} />
+                <Table columns={columns} dataSource={data} bordered size="small" pagination={{ hideOnSinglePage: true, pageSize: 10 }} />
             </Fragment>
         )
     }
@@ -161,78 +106,96 @@ class plan extends Component {
     }
 
     render() {
-        const columns = [
+      const{ data }=this.props;
+      const columns = [
           {
             title: '工单编号',
-            dataIndex: 'device',
-            key: 'device',
-            width: 180,
-            onCell:(record,index)=>({class:'test'})
-            // render: text => <a>{text}</a>,
-          },  {
-            title: '产品名称',
             dataIndex: 'order',
             key: 'order',
-            render: text => <span>220</span>,
-          }, {
-           title: '数量',
+            width: 180,
+            // onCell:(record,index)=>({class:'test'}),
+            render: (text,record,index) => <span>{`${text}${index+1}`}</span>,
+          },  {
+            title: '产品名称',
             dataIndex: 'product',
             key: 'product',
-            render: text => <span>220</span>,
+            // render: text => <span>220</span>,
+          }, {
+           title: '数量',
+            dataIndex: 'number',
+            key: 'number',
+            // render: text => <span>220</span>,
           }, {
             title: '计划开始时间',
-             dataIndex: 'capacity',
-             key: 'capacity',
-             render: text => <span>220</span>,
+             dataIndex: 'startTime',
+             key: 'startTime',
+            //  render: text => <span>220</span>,
            },
-        ];
-
-        const data = [{
-            key: '1',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '2',
-            name: '冷水主机动力开关箱',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '3',
-            name: '空压机开关箱',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, {
-            key: '4',
-            name: '制氮机配电柜',
-            device:"A01",
-            order: 0.85,
-            product:'产品',
-            capacity:23,
-            progress:47,
-            rest:3406,
-          }, 
-        ];
-
+      ];
+      
         return (
             <Fragment>
-                    <Table columns={columns} dataSource={data} bordered size="small" pagination={{ hideOnSinglePage: true, pageSize: 10 }} />
+              <Table columns={columns} dataSource={data} bordered size="small" pagination={{ hideOnSinglePage: true, pageSize: 10 }} />
             </Fragment>
         )
     }
 }
 
+const serviceTask =({data})=> {
+  const columns = [
+    {
+      title: '任务编号',
+      dataIndex: 'taskID',
+      key: 'taskID',
+      width: 180,
+      onCell:(record,index)=>({class:'test'})
+      // render: text => <a>{text}</a>,
+    },  {
+      title: '维修对象',
+      dataIndex: 'serviceObject',
+      key: 'serviceObject',
+      // render: text => <span>220</span>,
+    }, {
+      title: '故障原因',
+      dataIndex: 'cause',
+      key: 'cause',
+      // render: text => <span>220</span>,
+    },  {
+      title: '执行人',
+      dataIndex: 'man',
+      key: 'man',
+      // render: text => <span>220</span>,
+    },{
+      title: '预计完成时间',
+        dataIndex: 'planCompleteTime',
+        key: 'planCompleteTime',
+        // render: text => <span>220</span>,
+      },{
+        title: '状态',
+          dataIndex: 'status',
+          key: 'status',
+          render: v =>{
+            let _color=v==0?'#FF3565':v==1?"#367AF7":v==2?"#00D09D":'white';
+            return <span style={{color:_color}}>{_Service.getDescFromValue(v)}</span>
+          } 
+        },
+  ];
+  // const{ data }=this.props;
+  return (
+      <Fragment>
+        <Table 
+        columns={columns} 
+        dataSource={data} 
+        bordered 
+        size="small" 
+        pagination={{ hideOnSinglePage: true, pageSize: 10 }} 
+        />
+      </Fragment>
+  )
+}
+
 export{
-  table,plan
+  progress,
+  plan,
+  serviceTask
 }

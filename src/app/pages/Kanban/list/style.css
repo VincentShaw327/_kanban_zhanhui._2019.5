@@ -1,10 +1,13 @@
 /* @import '~antd/lib/table/style/index.css'; */
-@import '~antd/dist/antd.css';
+/* @import '~antd/dist/antd.css'; */
+@import '~antd/lib/list/style/index.css';
 
 .ant-table{
     color: white;
     font-size: 12px;
+    line-height: 0.6;
 }
+.ant-table-thead{line-height: 0.9;}
 .ant-table-small{border: none;}
 .ant-table table {
     /* width: 100%; */
@@ -41,3 +44,13 @@
 }
 /* .ant-table-bordered .ant-table-tbody > tr:hover{background: rgb(199, 230, 228)} */
 tbody>tr:hover{cursor: pointer;background: rgb(11, 8, 20);}
+
+
+
+/* list 样式 */
+.ant-list-split .ant-list-item{
+    border-bottom:none;
+}
+.light{
+    background: #ffffff1a;
+}
