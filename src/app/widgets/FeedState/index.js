@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import styles from './index'
 
-const DeviceState = ( {
+const FeedState = ( {
 txt, type, color, style, ...others
  } ) => {
      let bgColor
@@ -12,13 +12,13 @@ txt, type, color, style, ...others
             bgColor = '#28CB67'
             bdColor = '#2b8ec0'
             txColor = 'white'
-            txt = txt?txt:'运行中'
+            txt = txt?txt:'计量中'
             break;
         case 'WARNING':
             bgColor = '#FF3565'
             bdColor = '#2b8ec0'
             txColor = 'white'
-            txt = '报警中'
+            txt = '缺料'
             break;
         case 'DEBUG':
             bgColor = '#FFC106'
@@ -28,6 +28,12 @@ txt, type, color, style, ...others
             break;
         case 'OFFLINE':
             bgColor = '#5f5f5f'
+            bdColor = '#2b8ec0'
+            txColor = 'white'
+            txt = '离线中'
+            break;
+        case 'STANDBY':
+            bgColor = '#6388D2'
             bdColor = '#2b8ec0'
             txColor = 'white'
             txt = '离线中'
@@ -43,8 +49,8 @@ txt, type, color, style, ...others
     const initStyle = {
         color: color || txColor,
         border: 'solid 1px',
-        fontSize: '1.2em',
-        padding: '0.3em 0.85em',
+        fontSize: '14px',
+        padding: '2px 8px',
         borderRadius: '0.3em',
         display: 'inline-block',
         borderColor: '#d8d8d8',
@@ -57,4 +63,4 @@ txt, type, color, style, ...others
 }
 
 
-export default DeviceState;
+export default FeedState;

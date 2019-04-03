@@ -1,36 +1,48 @@
 import React, { Component, Fragment } from 'react'
 import styles from './index'
 
-const DeviceState = ( {
+const OrderState = ( {
 txt, type, color, style, ...others
  } ) => {
      let bgColor
      let txColor
      let bdColor
     switch ( type ) {
-        case 'RUNNING':
+        case 'PRODUCTION':
             bgColor = '#28CB67'
             bdColor = '#2b8ec0'
             txColor = 'white'
-            txt = txt?txt:'运行中'
+            txt = txt?txt:'生产中'
             break;
         case 'WARNING':
-            bgColor = '#FF3565'
+            bgColor = '#de3e3e'
             bdColor = '#2b8ec0'
             txColor = 'white'
             txt = '报警中'
-            break;
-        case 'DEBUG':
-            bgColor = '#FFC106'
-            bdColor = '#2b8ec0'
-            txColor = 'white'
-            txt = '调机中'
             break;
         case 'OFFLINE':
             bgColor = '#5f5f5f'
             bdColor = '#2b8ec0'
             txColor = 'white'
             txt = '离线中'
+            break;
+        case 'STOP':
+            bgColor = '#5f5f5f'
+            bdColor = '#2b8ec0'
+            txColor = 'white'
+            txt = '停止中'
+            break;
+        case 'PAUSE':
+            bgColor = '#5f5f5f'
+            bdColor = '#2b8ec0'
+            txColor = 'white'
+            txt = '暂停中'
+            break;
+        case 'STANDBY':
+            bgColor = '#a05d1c'
+            bdColor = '#2b8ec0'
+            txColor = 'white'
+            txt = '未排产'
             break;
 
         default:
@@ -57,4 +69,4 @@ txt, type, color, style, ...others
 }
 
 
-export default DeviceState;
+export default OrderState;
