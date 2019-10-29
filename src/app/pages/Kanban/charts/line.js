@@ -32,6 +32,9 @@ class qualified extends React.Component {
     const cols = {
       month: {
         range: [0, 1]
+      },
+      percent:{
+        tickCount:4
       }
     };
     return (
@@ -68,7 +71,7 @@ class qualified extends React.Component {
                   }
             }
             label={{
-              formatter: val => `${val}/%`,
+              formatter: val => `${val}%`,
               textStyle: {
                 textAlign: 'end', // 文本对齐方向，可取值为： start center end
                 fill: 'white', // 文本的颜色
@@ -121,7 +124,7 @@ class yieldRate extends React.Component {
       // key字段
       value: "temperature" // value字段
     });
-    console.log(dv);
+    // console.log(dv);
     const cols = {
       month: {
         range: [0, 1]
@@ -164,7 +167,7 @@ class yieldRate extends React.Component {
                   }
             }
             label={{
-              formatter: val => `${val}/%`,
+              formatter: val => `${val}%`,
               textStyle: {
                 textAlign: 'end', // 文本对齐方向，可取值为： start center end
                 fill: 'white', // 文本的颜色

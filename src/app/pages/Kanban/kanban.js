@@ -19,7 +19,7 @@ export default class Home extends Component {
         super( props )
         this.state = {
             first:{
-                deviceState:{
+                deviceStatus:{
                     run:60,
                     fault:5,
                     debug:11,
@@ -334,7 +334,27 @@ export default class Home extends Component {
                     progress:47,
                     number:3406,
                     startTime:'2019 07.13 15:47:24'
-                  }, 
+                  },  {
+                    key: '5',
+                    name: '制氮机配电柜',
+                    device:"A01",
+                    order: '2019021800',
+                    product:'产品',
+                    capacity:23098,
+                    progress:47,
+                    number:3406,
+                    startTime:'2019 07.13 15:47:24'
+                  }, {
+                    key: '6',
+                    name: '制氮机配电柜',
+                    device:"A01",
+                    order: '2019021800',
+                    product:'产品',
+                    capacity:23098,
+                    progress:47,
+                    number:3406,
+                    startTime:'2019 07.13 15:47:24'
+                  },
                 ]
             },
             third:{
@@ -508,7 +528,7 @@ export default class Home extends Component {
         },5000) */
     }
     componentWillUnmount(){
-        client.close();
+        // client.close();
     }
 
     onChange=(a,b,c,d)=>{
@@ -519,18 +539,20 @@ export default class Home extends Component {
         
         // mqtt消息连接建立
         // client = mqtt.connect( 'ws://192.168.3.231:8083/mqtt' );
-        // client = mqtt.connect( 'ws://47.91.154.238:8083/mqtt' );
-        client = mqtt.connect( 'ws://192.168.0.4:8083/mqtt' );
+        client = mqtt.connect( 'ws://47.91.154.238:8083/mqtt' );
+        // client = mqtt.connect( 'ws://192.168.0.4:8083/mqtt' );
         // client = mqtt.connect( 'ws://192.168.0.175:8083/mqtt' );
         
         client.on( 'connect', () => {
             // 订阅消息
             console.log('连接成功')
             // client.subscribe( 'TEST_DATA_SOOT' )
-            client.subscribe( 'inject_workshop' )
-            client.subscribe( 'machine_monitor' )
-            client.subscribe( 'device_maintain' )
-            client.subscribe( 'central_feed' )
+            // client.subscribe( 'inject_workshop' )
+            // client.subscribe( 'machine_monitor' )
+            // client.subscribe( 'device_maintain' )
+            // client.subscribe( 'central_feed' )
+            // client.subscribe( 'kanban' )
+            client.subscribe( 'Top-Link-KanBan-01' )
             // client.subscribe( 'SOOT_TEST_ANDROID_MSG_TO_SERVER' )
             // client.subscribe( '0101/086325608001/201712290001/kanban/01/B' );
             // client.subscribe( "0101/086325608001/201712290001/kanban/01/A" );
@@ -539,6 +561,10 @@ export default class Home extends Component {
         client.on( 'message', ( topic, payload ) => {
             // 接收到mqtt消息推送数据
             const mqttData = JSON.parse( payload );
+            const {first,second,third,fouth}=mqttData
+            this.setState({
+                first,second,third,fouth
+            })
             if(topic==='inject_workshop'){
                 this.setState((prevState,props)=>{
                     // console.log('prevState',prevState)
@@ -573,6 +599,7 @@ export default class Home extends Component {
                     }
                 })
             }
+            console.log( '接收到MQTT信息',topic,mqttData);
             // const {deviceState,unqualifiedList,qualifiedList,progressList,achieveList}=mqttData
             // this.setState({deviceState,unqualifiedList,qualifiedList,progressList,achieveList})
             // this.setState({...mqttData})
@@ -583,25 +610,62 @@ export default class Home extends Component {
         /* const autoPub=setInterval(() => {
             client.publish('inject_workshop',{"first":{"deviceState":{"run":77,"fault":5,"debug":11,"standby":4,"list":[{"item":"待机","count":4},{"item":"调膜","count":11},{"item":"故障","count":5},{"item":"运行","count":60}]},"unqualifiedList":[{"item":"表面起膜","count":23},{"item":"飞边","count":21},{"item":"未填满","count":17},{"item":"黑斑","count":13},{"item":"变形","count":13},{"item":"破裂","count":13}],"progressList":[{"key":"1","device":"A01","order":2019021800,"product":"鼠标外壳","capacity":23,"progress":47,"completed":234,"plan":4000,"rest":254},{"key":"2","name":"冷水主机动力开关箱","device":"A02","order":2019021800,"product":"产品","capacity":23,"progress":47,"completed":234,"plan":4000,"rest":3406},{"key":"3","name":"空压机开关箱","device":"A03","order":2019021800,"product":"鼠标外壳","capacity":23,"progress":47,"completed":234,"plan":4000,"rest":3406},{"key":"4","name":"制氮机配电柜","device":"A04","order":2019021800,"product":"鼠标外壳","capacity":23,"progress":47,"completed":234,"plan":4000,"rest":3406},{"key":"5","name":"纯水机房配电柜","device":"A05","order":2019021800,"product":"-","capacity":23,"progress":47,"completed":234,"plan":4000,"rest":3406},{"key":"6","name":"1F生产设备01","device":"A06","order":2019021800,"product":"-","capacity":23,"progress":47,"completed":234,"plan":4000,"rest":3406},{"key":"7","name":"1F生产设备02","device":"A07","order":2019021800,"product":"-","capacity":23,"progress":47,"completed":234,"plan":4000,"rest":3406},{"key":"8","name":"2F生产设备01","device":"A08","order":2019021800,"product":"-","capacity":23,"progress":47,"completed":234,"plan":4000,"rest":3406}],"achieveList":[{"name":"plan","3.1":18.9,"3.2":28.8,"3.3":39.3,"3.4":81.4,"3.5":47,"3.6":60.3,"3.7":24,"3.8":35.6,"3.9":35.6,"3.10":35.6},{"name":"actual","3.1":12.4,"3.2":23.2,"3.3":34.5,"3.4":99.7,"3.5":52.6,"3.6":35.5,"3.7":37.4,"3.8":42.4,"3.9":42.4,"3.10":42.4}],"qualifiedList":[{"month":"3.1","qualified":17,"unqualified":15.9},{"month":"3.2","qualified":16.9,"unqualified":14.2},{"month":"3.3","qualified":19.5,"unqualified":15.7},{"month":"3.4","qualified":14.5,"unqualified":8.5},{"month":"3.5","qualified":18.4,"unqualified":11.9},{"month":"3.6","qualified":21.5,"unqualified":15.2},{"month":"3.7","qualified":25.2,"unqualified":17},{"month":"3.8","qualified":26.5,"unqualified":16.6},{"month":"3.9","qualified":23.3,"unqualified":14.2}]}})
         }, 2000); */
-        console.log('mqData_first',mqData_first)
-        const autoPub=setInterval(() => {
+        // console.log('mqData_first',mqData_first)
+        /* const autoPub=setInterval(() => {
             client.publish('inject_workshop', JSON.stringify(mqData_first()) );
             client.publish('machine_monitor', JSON.stringify(mqData_second()) );
             client.publish('device_maintain', JSON.stringify(mqData_third()) );
             client.publish('central_feed', JSON.stringify(mqData_fouth()) );
-        }, 2000);
+        }, 2000); */
+    }
+
+    toggleScreen=( ele )=>{
+        const {isFullScreen}=this.state;
+        isFullScreen?this.exitScreen(ele):this.fullScreen(ele)
+    }
+
+    fullScreen=( ele )=> {
+        console.log( 'ele', ele );
+        this.setState( { isFullScreen: true } );
+        const el = document.documentElement;
+        const rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+        if ( typeof rfs !== 'undefined' && rfs ) {
+            rfs.call( el );
+        } else if ( typeof window.ActiveXObject !== 'undefined' ) {
+            // for IE，这里其实就是模拟了按下键盘的F11，使浏览器全屏
+            const wscript = new ActiveXObject( 'WScript.Shell' );
+            if ( wscript != null ) {
+                wscript.SendKeys( '{F11}' );
+            }
+        }
+    }
+    // 退出全屏
+    exitScreen=( ele )=> {
+        this.setState( { isFullScreen: false } );
+        if ( document.exitFullscreen ) {
+            document.exitFullscreen();
+        } else if ( document.mozCancelFullScreen ) {
+            document.mozCancelFullScreen();
+        } else if ( document.webkitCancelFullScreen ) {
+            document.webkitCancelFullScreen();
+        } else if ( document.msExitFullscreen ) {
+            document.msExitFullscreen();
+        }
+        if ( typeof cfs !== 'undefined' && cfs ) {
+            cfs.call( el );
+        }
     }
 
     render() {
-
+        //
         return (
             <div className={styles.kanban}>
-                {/* <Carousel autoplay> */}
-                <Carousel afterChange={this.onChange}>
-                    <First {...this.state.first}/>
-                    <Second {...this.state.second}/>
-                    <Third {...this.state.third}/>
-                    <Fouth {...this.state.fouth}/>
+                <Carousel autoplay>
+                {/* <Carousel afterChange={this.onChange}> */}
+                     <First {...this.state.first} togglescreen={this.toggleScreen} />
+                    <Second {...this.state.second} togglescreen={this.toggleScreen} />
+                    <Third {...this.state.third} togglescreen={this.toggleScreen} />
+                    <Fouth {...this.state.fouth} togglescreen={this.toggleScreen} />
                 </Carousel>
             </div>
         )

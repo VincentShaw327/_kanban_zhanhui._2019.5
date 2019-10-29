@@ -18,12 +18,12 @@ import DataSet from "@antv/data-set";
 
 class achieveChart extends React.Component {
   render() {
-    const{data}=this.props;
+    const{data,field}=this.props;
     const ds = new DataSet();
     const dv = ds.createView().source(data);
     dv.transform({
       type: "fold",
-      fields: ["3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8","3.9","3.10"],
+      fields:field|| ["3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8","3.9","3.10"],
       // 展开字段集
       key: "月份",
       // key字段
@@ -119,7 +119,7 @@ class serviceHistory extends React.Component {
       undone: {
         type: 'linear',
         min: 0,
-        max: 100,
+        // max: 1000,
       },
     };
     return (

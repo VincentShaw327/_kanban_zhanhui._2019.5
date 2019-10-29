@@ -15,6 +15,7 @@ import Gauge from '../charts/gauge.js'
 import {serviceHistory as ServiceHistory} from '../charts/bar.js'
 import {serviceTask as ServiceTask} from '../list/table.js'
 import Dynamic from '../list/list.js'
+import bgimg03 from '../../../assets/images/empty/03.png'
 
 export default class first extends Component {
     constructor( props, context ) {
@@ -123,8 +124,8 @@ export default class first extends Component {
         const{serviceList,malfunction,dynamicList,serviceHistoryList,serviceTaskList}=this.props;
         const{list,debuging,completed,standby}=serviceList
         return (
-            <div className={styles.first}>
-                <header className={styles.header}>
+            <div className={styles.third} style={{backgroundImage:`url(${bgimg03})`}}>
+                <header className={styles.header} onClick={this.props.togglescreen}>
                     <div className={styles.clock}>
                         <Clock style={{color:'white'}}/>
                     </div>

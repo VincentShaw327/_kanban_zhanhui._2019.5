@@ -55,7 +55,7 @@ export default class progress extends Component {
              dataIndex: 'capacity',
             width: 80,
             key: 'capacity',
-             render: text => <span>220</span>,
+            //  render: text => <span>220</span>,
            }, {
             title: '进度',
             dataIndex: 'progress',
@@ -70,14 +70,20 @@ export default class progress extends Component {
             title: '剩余',
             dataIndex: 'rest',
             key: 'rest',
-            render: num =>{
+            render: (num,record) =>{
               let time=moment.duration(num, 'minutes');
-              console.log('time',time.hours())
+              let {plan,completed,capacity}=record
+              plan=plan||0
+              completed=completed||0
+              capacity=capacity||0
+              // console.log('time',time.hours())
               const days=time.days();
               const hours=time.hours();
-              const minutes=time.minutes();
+              // const minutes=time.minutes();
+              const minutes=Math.ceil((plan-completed)/capacity)
               return(<span>
-                {`${hours}时${minutes}分`}
+                {/* {`${hours}时${minutes}分`} */}
+                {`${minutes}分`}
               </span>)
             } 
           }, 

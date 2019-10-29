@@ -197,7 +197,7 @@ class Metering extends React.Component {
                             text-align: center;>
                             <span style="color:white;margin: 0;">
                                 <span style="font-size: 14px;font-weight:Bold;color:white; margin-left:5px;">
-                                    ${weight}  KG
+                                    ${parseInt(weight,10).toFixed(2) }  KG
                                 </span>
                             </span>
                 </div>`)

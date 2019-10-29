@@ -16,6 +16,8 @@ import Qualified from '../charts/line.js'
 import Progress from '../list/table.js'
 import _ from 'lodash/number'
 
+import bgimg01 from '../../../assets/images/empty/01.png'
+
 export default class first extends Component {
     constructor( props, context ) {
         super( props )
@@ -240,12 +242,27 @@ export default class first extends Component {
     render() {
         // const {run,fault,debug,standby,list}=this.state.deviceState
         // const {unqualifiedList,qualifiedList,progressList,achieveList}=this.state
-        const {run,fault,debug,standby,list}=this.props.deviceState
+        const {run,fault,debug,standby,list}=this.props.deviceStatus
         const {unqualifiedList,qualifiedList,progressList,achieveList}=this.props
-        console.log('run',run,this.props)
+        // let _acdlist01=achieveList[0].achieveList
+        // let _acdlist02=achieveList[1].achieveList
+        let achieveField
+        let _acArrList= achieveList.map(ele=>{
+            achieveField=[];
+            let obj={
+                name:ele.name
+            };
+            ele.dataList&&ele.dataList.forEach(ele2 => {
+                obj[ele2.day]=ele2.num
+                achieveField.push(ele2.day)
+            });
+            return obj;
+        })
+        let devSum=run+fault+debug+standby
+        // console.log('_acArrList',_acArrList,achieveField)
         return (
-            <div className={styles.first}>
-                <header className={styles.header}>
+            <div className={styles.first} style={{backgroundImage:`url(${bgimg01})`}}>
+                <header className={styles.header} onClick={this.props.togglescreen}>
                     <div className={styles.clock}><Clock style={{color:'white'}}/></div>
                 </header>
                 <section className={styles.section}>
@@ -253,13 +270,13 @@ export default class first extends Component {
                         <Col span={13} style={{border:'solid 0px white'}}>
                             <div className={styles.state}>
                                 <div className={styles.piechart}>
-                                    <DevState data={list}/>
+                                    <DevState data={list} sum={devSum} />
                                 </div>
                                 <div className={styles.number}>
-                                    <span className={styles.run}>{run}</span>
-                                    <span className={styles.fault}>{fault}</span>
-                                    <span className={styles.debug}>{debug}</span>
-                                    <span className={styles.standby}>{standby}</span>
+                                    <span className={styles.run}>{run||0}</span>
+                                    <span className={styles.fault}>{fault||0}</span>
+                                    <span className={styles.debug}>{debug||0}</span>
+                                    <span className={styles.standby}>{standby||0}</span>
                                 </div>
                             </div>
                             <div className={styles.progress}>
@@ -268,7 +285,7 @@ export default class first extends Component {
                         </Col>
                         <Col span={10} style={{border:'solid 0px white',height:620}}>
                             <div className={styles.achieve}>
-                                <AchieveChart data={achieveList}/>
+                                <AchieveChart data={_acArrList||achieveList} field={achieveField||[]}/>
                             </div>
                             <div className={styles.qualified}>
                                 <Qualified data={qualifiedList}/>

@@ -13,6 +13,7 @@ import {Metering} from '../charts/gauge.js'
 import {_Dry} from 'enums/device'
 import {_PA,_ABS,_POM} from 'enums/feed'
 import {order} from 'enums/orders'
+import bgimg04 from '../../../assets/images/empty/04.png'
 
 
 export default class first extends Component {
@@ -95,8 +96,8 @@ export default class first extends Component {
         )
 
         return (
-            <div className={styles.first}>
-                <header className={styles.header}>
+            <div className={styles.fouth} style={{backgroundImage:`url(${bgimg04})`}}>
+                <header className={styles.header} onClick={this.props.togglescreen}>
                     <div className={styles.clock}>
                         <Clock style={{color:'white'}}/>
                     </div>

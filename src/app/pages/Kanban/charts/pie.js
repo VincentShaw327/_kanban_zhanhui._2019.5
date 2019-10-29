@@ -20,9 +20,9 @@ class devState extends React.Component {
   render() {
     const { DataView } = DataSet;
     const { Html } = Guide;
-    const {data}=this.props
+    const {data,sum}=this.props
     const dv = new DataView();
-    dv.source(data).transform({
+    dv.source(data||[]).transform({
       type: "percent",
       field: "count",
       dimension: "item",
@@ -60,7 +60,9 @@ class devState extends React.Component {
           <Guide>
             <Html
               position={["50%", "50%"]}
-              html="<div style=&quot;color:white;font-size:0.5em;text-align: center;width: 10em;&quot;>共200台</div>"
+              // html={`<div style=&quot;color:white;font-size:0.5em;text-align: center;width: 10em;&quot;>${sum}台</div>`}
+              // {/* "<div >"+sum+"台</div>" */}
+              html={`<span style="color:white">${sum}台</span>`}
               alignX="middle"
               alignY="middle"
             />

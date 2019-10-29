@@ -17,6 +17,7 @@ import {yieldRate as YRate} from '../charts/line.js'
 import {plan as Task} from '../list/table.js'
 import {order} from 'enums'
 import {_Inj,_Robot,_Mold} from 'enums/device'
+import bgimg02 from '../../../assets/images/empty/02.png'
 
 
 export default class first extends Component {
@@ -121,6 +122,16 @@ export default class first extends Component {
                 progress:47,
                 number:3406,
                 startTime:'2019 07.13 15:47:24'
+              }, {
+                key: '5',
+                name: '制氮机配电柜',
+                device:"A01",
+                order: '2019021800',
+                product:'产品',
+                capacity:23098,
+                progress:47,
+                number:3406,
+                startTime:'2019 07.13 15:47:24'
               }, 
             ]
         }
@@ -130,8 +141,8 @@ export default class first extends Component {
         // const{orderData,deviceState,effectiveness,yieldRateList,taskList}=this.state;
         const{orderData,deviceState,effectiveness,yieldRateList,taskList}=this.props;
         return (
-            <div className={styles.first}>
-                <header className={styles.header}>
+            <div className={styles.second} style={{backgroundImage:`url(${bgimg02})`}}>
+                <header className={styles.header} onClick={this.props.togglescreen}>
                     <div className={styles.clock}>
                         <Clock style={{color:'white'}}/>
                     </div>
@@ -167,15 +178,15 @@ export default class first extends Component {
                                 {/* <Progress/> */}
                                 <div className={styles.inject}>
                                     <span className={styles.name}>注塑机</span>
-                                    <DeviceState type={_Inj.getTypeFromValue(1)} />
+                                    <DeviceState type={_Inj.getTypeFromValue(deviceState.robot ||1)} />
                                 </div>
                                 <div className={styles.robot}>
                                     <span className={styles.name}>机械手</span>
-                                    <DeviceState type={_Robot.getTypeFromValue(-1)} />
+                                    <DeviceState type={_Robot.getTypeFromValue(deviceState.inject ||1)} />
                                 </div>
                                 <div className={styles.mold}>
                                     <span className={styles.name}>模温机</span>
-                                    <DeviceState type={_Mold.getTypeFromValue(2)} />
+                                    <DeviceState type={_Mold.getTypeFromValue(1 ||1)} />
                                 </div>
                             </div>
                         </Col>
@@ -192,7 +203,7 @@ export default class first extends Component {
                                         <Gauge value={effectiveness.performanceRate} name="性能稼动率" color="#00BCFF"/>
                                     </Col>
                                     <Col span={6} style={{border:'solid 0px white',height:'85%'}}>
-                                        <Gauge value={effectiveness.deviceEffRate} name="设备综合效率" color="#FFC106"/>
+                                        <Gauge value={effectiveness.deviceEffRate} name="良品率" color="#FFC106"/>
                                     </Col>
                                 </Row>
                             </div>
